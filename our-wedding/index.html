@@ -17,7 +17,7 @@
           </div>
           <div class="mb-3">
             <button class="btn btn-primary" type="button" onclick="gas()">Copy to clipboard</button>
-            <button class="btn btn-primary" type="button" onclick="share()">Share</button>
+            <button class="btn btn-primary" type="button" onclick="shareText()">Share</button>
           </div>
           <div class="toast align-items-center" role="alert" id="copiedSuccessful" aria-live="assertive" aria-atomic="true" data-bs-config='{"delay":2000, "autohide": true'>
             <div class="d-flex">
@@ -84,8 +84,9 @@
       } else {
         textarea.value = ''
       }
-    } 
-    function share(){
+    }
+
+    async function shareText(){
       const textarea = document.getElementsByTagName('textarea')[0]
       const shareData = {
         text: textarea.value
@@ -96,9 +97,8 @@
           const toast = new bootstrap.Toast(toastLiveExample)
           toast.show()
         } catch (err) {
-          
+
         }
-      });
     }
 
     function gas () {
