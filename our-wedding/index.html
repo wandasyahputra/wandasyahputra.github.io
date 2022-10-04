@@ -88,8 +88,11 @@
 
     async function shareText(){
       const textarea = document.getElementsByTagName('textarea')[0]
+      const input = document.getElementsByTagName('input')[0].value
+      const guestUrl = input.replaceAll(' ','+')
       const shareData = {
-        text: textarea.value
+        text: textarea.value,
+        url: 'https://undanganpayakumbuh.online/suci-wanda/?to='+guestUrl
       }
         try {
           await navigator.share(shareData);
