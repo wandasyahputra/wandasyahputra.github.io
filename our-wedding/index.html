@@ -15,6 +15,10 @@
             <label for="exampleFormControlInput1" class="form-label">Guest Name</label>
             <input type="text" class="form-control" id="exampleFormControlInput1" onkeyup="onKeyUp()" placeholder="example: Mbak Uciku Sayang">
           </div>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" onchange="onKeyUp()" role="switch" id="isEnglish">
+            <label class="form-check-label" for="flexSwitchCheckDefault">English?</label>
+          </div>
           <div class="mb-3">
             <button class="btn btn-primary" type="button" onclick="gas()">Copy to clipboard</button>
             <button class="btn btn-primary" type="button" onclick="shareText()">Share</button>
@@ -47,10 +51,11 @@
     function onKeyUp () {
       const input = document.getElementsByTagName('input')[0].value
       const textarea = document.getElementsByTagName('textarea')[0]
+      const lang = document.getElementById('isEnglish').checked
       if(input.length > 0) {
         const guestName = input
         const guestUrl = input.replaceAll(' ','+')
-        const message = 
+        const messageID = 
           'Assalamu’alaikum Warahmatullahi Wabarakaatuh \n' +
           guestName+'\n'+
           '\n'+
@@ -79,7 +84,37 @@
           'Atas kehadiran dan dan do’a restunya kami sampaikan banyak terima kasih.\n'+
           'Kami yang berbahagia ❤\n'+
           'Suci & Wanda';
-        textarea.value = message
+          
+        const messageEN =
+          'Dear '+guestName+',\n'+
+          '\n'+
+          'We are happy to announce that:\n'+
+          '\n'+
+          '*Putri Suci Yuliani & Wanda Syahputra are getting married!!!*\n'+
+          '\n'+
+          'Together with our family, we will have our wedding day on:\n'+
+          '\n'+
+          'Day, Date: Saturday, Oct 15, 2022\n'+
+          'Time: 10.00-end\n'+
+          'Location: Jalan Dang Tuanku Jorong II Balai Ahad RK 03 / RT 03 Kecamatan Lubuk Basung, Kabupaten Agam, Sumatera Barat\n'+
+          '\n'+
+          'You can see the detail through the link below:\n'+
+          '\n'+
+          'https://undanganpayakumbuh.online/suci-wanda/?to='+guestUrl+'\n'+
+          '\n'+
+          'We truly hope that you can join our happy day, and giving us the best prayer and your blessing.\n'+
+          '\n'+
+          'We’ll see you 💚\n'+
+          '\n'+
+          'Regards,\n'+
+          'Suci & Wanda\n'+
+          '\n'+
+          'Note: To remind you before the day, don’t forget to add our wedding schedule to your Google Calendar\n'
+        if(lang) {
+          textarea.value = messageEN
+        } else {
+          textarea.value = messageID
+        }
       } else {
         textarea.value = ''
       }
