@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wedding Suci dan Wanda</title>
+</head>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<html>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-5">
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Guest Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" onkeyup="onKeyUp()" placeholder="example: Mbak Uciku Sayang">
+          </div>
+          <div class="form-check form-switch mb-3">
+            <!-- <input class="form-check-input" type="checkbox" onchange="onKeyUp()" role="switch" id="isEnglish">
+            <label class="form-check-label" for="flexSwitchCheckDefault">English?</label> -->
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary" type="button" onclick="gas()">Copy to clipboard</button>
+            <button class="btn btn-primary" type="button" onclick="shareText()">Share</button>
+          </div>
+          <div class="toast align-items-center" role="alert" id="copiedSuccessful" aria-live="assertive" aria-atomic="true" data-bs-config='{"delay":2000, "autohide": true'>
+            <div class="d-flex">
+              <div class="toast-body">
+                Copied to your clipboard.
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+          <div class="toast align-items-center" role="alert" id="sharedSuccessful" aria-live="assertive" aria-atomic="true" data-bs-config='{"delay":2000, "autohide": true'>
+            <div class="d-flex">
+              <div class="toast-body">
+                Shared successfully
+              </div>
+              <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Preview</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="15"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </body>
+  <script>
+    function onKeyUp () {
+      const input = document.getElementsByTagName('input')[0].value
+      const textarea = document.getElementsByTagName('textarea')[0]
+      const lang = document.getElementById('isEnglish').checked
+      if(input.length > 0) {
+        const guestName = input
+        const guestUrl = input.replaceAll(' ','+')
+        const messageID = 
+        'Assalamu\'alaikum Wr.Wb\n'+
+        '\n'+
+        'Dengan rahmat dan ridho dari Allah SWT.kami bermaksud mengundang Bapak/Ibu/Saudara/i *'+guestName+'* di acara kami,\n'+
+        '\n'+
+        'Pada Akad Nikah\n'+ 
+        'Tanggal : 19-10-2024\n'+ 
+        'Pukul : 14.00-selesai\n'+ 
+        'Lokasi : Kediaman mempelai wanita Blok A Kodrat SIT 3, Jorong tawakal, Nagari Kurnia Koto Salak, Kecamatan Sungai Rumbai, Dharmasraya\n'+
+        '\n'+
+        'Resepsi\n'+ 
+        'Tanggal : 20-10-2024\n'+ 
+        'Pukul : 09.00-selesai\n'+ 
+        'Lokasi : Kediaman mempelai wanita Blok A Kodrat SIT 3, Jorong tawakal, Nagari Kurnia Koto Salak, Kecamatan Sungai Rumbai, Dharmasraya\n'+
+        '\n'+
+        'untuk detail undangan bisa lihat di:\n'+ 
+        'https://our-wedding.link/CFsD_rufi-harry?to='+guestUrl+'\n'+
+        '\n'+
+        '\n'+
+        'Yang Berbahagia *Rufy & Harry*\n'
+          
+        const messageEN =
+          'Dear '+guestName+',\n'+
+          '\n'+
+          'We are happy to announce that:\n'+
+          '\n'+
+          '*Putri Suci Yuliani & Wanda Syahputra are getting married!!!*\n'+
+          '\n'+
+          'Together with our family, we will have our wedding day on:\n'+
+          '\n'+
+          'Day, Date: Saturday, Oct 15, 2022\n'+
+          'Time: 10.00-end\n'+
+          'Location: Jalan Dang Tuanku Jorong II Balai Ahad RK 03 / RT 03 Kecamatan Lubuk Basung, Kabupaten Agam, Sumatera Barat\n'+
+          '\n'+
+          'You can see the detail through the link below:\n'+
+          '\n'+
+          'https://undanganpayakumbuh.online/suci-wanda/?to='+guestUrl+'\n'+
+          '\n'+
+          'We truly hope that you can join our happy day, and giving us the best prayer and your blessing.\n'+
+          '\n'+
+          'We’ll see you 💚\n'+
+          '\n'+
+          'Regards,\n'+
+          'Suci & Wanda\n'+
+          '\n'+
+          'Note: To remind you before the day, don’t forget to add our wedding schedule to your Google Calendar\n'
+        if(lang) {
+          textarea.value = messageEN
+        } else {
+          textarea.value = messageID
+        }
+      } else {
+        textarea.value = ''
+      }
+    }
+
+    async function shareText(){
+      const textarea = document.getElementsByTagName('textarea')[0]
+      const input = document.getElementsByTagName('input')[0].value
+      const guestUrl = input.replaceAll(' ','+')
+      const shareData = {
+        text: textarea.value,
+      }
+        try {
+          await navigator.share(shareData);
+          const toastLiveExample = document.getElementById('sharedSuccessful')
+          const toast = new bootstrap.Toast(toastLiveExample)
+          toast.show()
+        } catch (err) {
+
+        }
+    }
+
+    function gas () {
+      const textarea = document.getElementsByTagName('textarea')[0]
+      textarea.select()
+      document.execCommand('copy');
+      document.getSelection().removeAllRanges();
+      const toastLiveExample = document.getElementById('copiedSuccessful')
+      const toast = new bootstrap.Toast(toastLiveExample)
+      toast.show()
+    }
+  </script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</html>
